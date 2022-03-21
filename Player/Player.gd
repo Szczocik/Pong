@@ -2,11 +2,11 @@ extends KinematicBody2D
 
 var speed = 400
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	var velocity = Vector2.ZERO
-	if Input.is_action_just_pressed("ui_up"):
+	if Input.is_action_pressed("ui_up"):
 		velocity.y -= 1
-	if Input.is_action_just_pressed("ui_down"):
+	if Input.is_action_pressed("ui_down"):
 		velocity.y += 1
 	move_and_slide(velocity * speed)
 		
