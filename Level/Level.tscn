@@ -1,19 +1,51 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Opponent/Opponent.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Ball/Ball.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Level/Level.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 644, 10 )
 
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 31, 366.25 )
+
 [node name="Level" type="Node"]
+script = ExtResource( 4 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_scale = Vector2( 1.00485, 0.999284 )
 color = Color( 0.0784314, 0.129412, 0.14902, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerScore" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -200.0
+margin_top = 1.0
+margin_bottom = 1.0
+custom_colors/font_color = Color( 0.85098, 0.847059, 0.843137, 1 )
+text = "Test"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OpponentScore" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 199.0
+margin_right = -1.0
+custom_colors/font_color = Color( 0.85098, 0.847059, 0.843137, 1 )
+text = "Test"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -46,3 +78,19 @@ position = Vector2( 1236, 336 )
 [node name="Ball" parent="." instance=ExtResource( 3 )]
 position = Vector2( 653, 308 )
 scale = Vector2( 0.991415, 0.980786 )
+
+[node name="Left" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left"]
+position = Vector2( -31, 367.25 )
+shape = SubResource( 2 )
+
+[node name="Right" type="Area2D" parent="."]
+position = Vector2( 1345, -6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right"]
+position = Vector2( -31, 367.25 )
+shape = SubResource( 2 )
+
+[connection signal="body_entered" from="Left" to="." method="_on_Left_body_entered"]
+[connection signal="body_entered" from="Right" to="." method="_on_Right_body_entered"]
