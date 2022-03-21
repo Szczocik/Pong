@@ -13,3 +13,6 @@ func _physics_process(delta):
 	if collision_object:
 		velocity = velocity.bounce(collision_object.normal)
 		
+func stop_ball():
+	speed = 0 
+	
