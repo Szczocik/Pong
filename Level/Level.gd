@@ -6,20 +6,19 @@ var OpponentScore = 0
 func _on_Left_body_entered(body):
 	$Ball.position = Vector2(640,360)
 	OpponentScore += 1
-	if OpponentScore == 5:
-		game_over()
+	if OpponentScore == 3:
+		game_win()
 	get_tree().call_group('BallGroup','stop_ball')
 	$CountdownTimer.start()
 	$CountdownLabel.visible = true
 	$ScoreSound.play()
 
 	
-
 func _on_Right_body_entered(body):
 	$Ball.position = Vector2(640,360)
 	PlayerScore += 1
-	if PlayerScore == 5:
-		game_over()
+	if PlayerScore == 3:
+		game_win()
 	get_tree().call_group('BallGroup','stop_ball')
 	$CountdownTimer.start()
 	$CountdownLabel.visible = true
@@ -32,12 +31,11 @@ func _process(delta):
 	$CountdownLabel.text = str(int($CountdownTimer.time_left) + 1)
 	
 
-
 func _on_CountdownTimer_timeout():
 	get_tree().call_group('BallGroup','restart_ball')
 	$CountdownLabel.visible = false
 	
 
-func game_over():
+func game_win():
 	get_tree().change_scene("res://Level/GameWin.tscn")
 	
